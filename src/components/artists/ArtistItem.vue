@@ -20,10 +20,10 @@ export default {
       return this.firstName + ' ' + this.lastName;
     },
     artistContactLink() {
-      return this.$route.path + '/' + this.id + '/contact'; // /coaches/c1/contact
+      return this.$route.path + '/' + this.id + '/contact'; 
     },
     artistDetailsLink() {
-      return this.$route.path + '/' + this.id; // /coaches/c1
+      return this.$route.path + '/' + this.id; 
     },
   },
 };
