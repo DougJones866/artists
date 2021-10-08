@@ -19,19 +19,19 @@
         <div class="form-control">
             <h3>Areas of Expertise</h3>
             <div>
-                <input type="checkbox" id="realistic" value="realistic" v-model="areas">
+                <input type="checkbox" id="realistic" value="realistic" v-model="areas"/>
                 <label for="realistic">Realistic</label>
             </div>
             <div>
-                <input type="checkbox" id="anime" value="anime" v-model="areas">
+                <input type="checkbox" id="anime" value="anime" v-model="areas"/>
                 <label for="anime">Anime</label>
             </div>
             <div>
-                <input type="checkbox" id="chibi" value="chibi" v-model="areas">
+                <input type="checkbox" id="chibi" value="chibi" v-model="areas"/>
                 <label for="chibi">Chibi</label>
             </div>
             <div>
-                <input type="checkbox" id="mechac" value="mecha" v-model="areas">
+                <input type="checkbox" id="mecha" value="mecha" v-model="areas" />
                 <label for="mecha">Mecha</label>
             </div>
         </div>
@@ -48,7 +48,7 @@ export default {
             lastName: '',
             description: '',
             rate: null,
-            area: [],
+            areas: [],
 
         }
         

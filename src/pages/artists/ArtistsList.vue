@@ -36,29 +36,30 @@ export default {
   data() {
     return {
       activeFilters: {
-        frontend: true,
-        backend: true,
-        career: true,
-      },
+        anime: true,
+        realistic: true,
+        mecha: true,
+        chibi: true,
+      }
     };
   },
   computed: {
-    isArtist() {
-      return this.$store.getters['artists/isArtist'];
-    },
+    // isArtist() {
+    //   return this.$store.getters['artists/isArtist'];
+    // },
     filteredArtists() {
       const artists = this.$store.getters['artists/artists'];
       return artists.filter((artist) => {
-        if (this.activeFilters.frontend && artist.areas.includes('anime')) {
+        if (this.activeFilters.anime && artist.areas.includes('anime')) {
           return true;
         }
-        if (this.activeFilters.backend && artist.areas.includes('realistic')) {
+        if (this.activeFilters.realistic && artist.areas.includes('realistic')) {
           return true;
         }
-        if (this.activeFilters.career && artist.areas.includes('chibi')) {
+        if (this.activeFilters.chibi && artist.areas.includes('chibi')) {
           return true;
         }
-        if (this.activeFilters.career && artist.areas.includes('mecha')) {
+        if (this.activeFilters.mecha && artist.areas.includes('mecha')) {
           return true;
         }
         return false;
