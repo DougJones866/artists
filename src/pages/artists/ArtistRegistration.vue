@@ -14,11 +14,12 @@ export default {
   components: {
     ArtistForm,
   },
+  
   methods: {
     saveData(data) {
       this.$store.dispatch('artists/registerArtist', data);
       this.$router.replace('/artists');
     }
-  }
+  },
 };
 </script>

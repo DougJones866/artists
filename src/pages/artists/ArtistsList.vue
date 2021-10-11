@@ -44,9 +44,9 @@ export default {
     };
   },
   computed: {
-    // isArtist() {
-    //   return this.$store.getters['artists/isArtist'];
-    // },
+    isArtist() {
+      return this.$store.getters['artists/isArtist'];
+    },
     filteredArtists() {
       const artists = this.$store.getters['artists/artists'];
       return artists.filter((artist) => {
