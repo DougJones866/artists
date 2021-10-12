@@ -5,10 +5,13 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-        <base-button v-if="!isArtist" link to="/register">Register as Artist</base-button>
+        <base-button mode="outline" @click="loadArtists">Refresh</base-button>
+        <base-button v-if="!isArtist && !isLoading" link to="/register">Register as Artist</base-button>
       </div>
-      <ul v-if="hasArtists">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="hasArtists">
         <artist-item
           v-for="artist in filteredArtists"
           :key="artist.id"
@@ -27,14 +30,17 @@
 <script>
 import ArtistItem from '../../components/artists/ArtistItem.vue';
 import ArtistFilter from '../../components/artists/ArtistFilter.vue';
+import RequestItem from '../../components/requests/RequestItem.vue';
 
 export default {
   components: {
     ArtistItem,
     ArtistFilter,
+    RequestItem,
   },
   data() {
     return {
+      isLoading: false,
       activeFilters: {
         anime: true,
         realistic: true,
@@ -66,13 +72,21 @@ export default {
       });
     },
     hasArtists() {
-      return this.$store.getters['artists/hasArtists'];
+      return !this.isLoading && this.$store.getters['artists/hasArtists'];
     },
+  },
+  created() {
+    this.loadArtists();
   },
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
+    async loadArtists() {
+      this.isLoading = true;
+     await this.$store.dispatch('artists/loadArtists');
+     this.isLoading = false;
+    }
   },
 };
 </script>
