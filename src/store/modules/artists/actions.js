@@ -33,7 +33,8 @@ export default {
     const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/artists/.json`);
     const responseData = await response.json();
     if (!response.ok) {
-      // ...
+      const error = new Error(responseData.message || 'Failed to fetch!');
+      throw error;
     }
 
     const artists = [];

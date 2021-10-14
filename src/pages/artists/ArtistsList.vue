@@ -1,4 +1,8 @@
 <template>
+  <base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
+  <p>{{ error }}</p>
+
+  </base-dialog>
   <section>
     <artist-filter @change-filter="setFilters"></artist-filter>
   </section>
@@ -31,16 +35,19 @@
 import ArtistItem from '../../components/artists/ArtistItem.vue';
 import ArtistFilter from '../../components/artists/ArtistFilter.vue';
 import RequestItem from '../../components/requests/RequestItem.vue';
+import BaseDialog from '../../components/ui/BaseDialog.vue';
 
 export default {
   components: {
     ArtistItem,
     ArtistFilter,
     RequestItem,
+    BaseDialog,
   },
   data() {
     return {
       isLoading: false,
+      error: null,
       activeFilters: {
         anime: true,
         realistic: true,
@@ -84,9 +91,16 @@ export default {
     },
     async loadArtists() {
       this.isLoading = true;
-     await this.$store.dispatch('artists/loadArtists');
+      try {
+        await this.$store.dispatch('artists/loadArtists');
+        } catch (error) {
+          this.error = error.message || 'Something went wrong!';
+        }
      this.isLoading = false;
-    }
+    },
+    handleError() {
+      this.error = null;
+    },
   },
 };
 </script>
