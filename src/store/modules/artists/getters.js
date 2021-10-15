@@ -9,5 +9,13 @@ export default {
     const artists = getters.artists;
     const userId = rootGetters.userId;
     return artists.some(artist => artist.id === userId);
+  },
+  shouldUpdate(state) {
+    const lastFetch = state.lastFetch;
+    if (!lastFetch) {
+      return true;
+    }
+    const currentTimeStamp = new Date().getTime();
+    return (currentTimeStamp - lastFetch) / 1000 > 60;
   }
 };

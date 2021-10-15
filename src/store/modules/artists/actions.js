@@ -29,7 +29,10 @@ export default {
       id: userId
     });
   },
-  async loadArtists(context) {
+  async loadArtists(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
     const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/artists/.json`);
     const responseData = await response.json();
     if (!response.ok) {
@@ -51,6 +54,7 @@ export default {
       artists.push(artist);
     }
 
-    context.commit('setArtists', artists)
+    context.commit('setArtists', artists);
+    context.commit('setFetchTimestamp');
   }
 };

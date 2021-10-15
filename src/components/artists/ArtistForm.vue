@@ -1,4 +1,5 @@
 <template>
+<div>
     <form @submit.prevent="submitForm">
         <div class="form-control" :class="{invalid: !firstName.isValid}">
             <label for="firstname">First Name</label>
@@ -43,6 +44,7 @@
         <p v-if="!formIsValid">Please fix the above erros and submit again</p>
         <base-button>Register</base-button>
     </form>
+</div>
 </template>
 
 <script>

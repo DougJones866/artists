@@ -1,10 +1,12 @@
 <template>
+<div>
   <section>
     <base-card>
       <h2>Register as an Artist now!</h2>
       <artist-form @save-data="saveData"></artist-form>
     </base-card>
   </section>
+</div>
 </template>
 
 <script>

@@ -1,4 +1,5 @@
 <template>
+<div>
   <base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
   <p>{{ error }}</p>
 
@@ -9,7 +10,7 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadArtists">Refresh</base-button>
+        <base-button mode="outline" @click="loadArtists(true)">Refresh</base-button>
         <base-button v-if="!isArtist && !isLoading" link to="/register">Register as Artist</base-button>
       </div>
       <div v-if="isLoading">
@@ -29,6 +30,7 @@
       <h3 v-else>No artists found.</h3>
     </base-card>
   </section>
+</div>
 </template>
 
 <script>
@@ -89,10 +91,10 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    async loadArtists() {
+    async loadArtists(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('artists/loadArtists');
+        await this.$store.dispatch('artists/loadArtists', {forceRefresh: refresh });
         } catch (error) {
           this.error = error.message || 'Something went wrong!';
         }
