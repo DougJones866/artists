@@ -23,7 +23,8 @@ export default {
     },
     async fetchRequests(context) {
         const artistId = context.rootGetters.userId;
-        const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/requests/${artistId}.json`);
+        const token = context.rootGetters.token;
+        const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/requests/${artistId}.json?auth=` + token);
         const responseData = await response.json();
 
         if (!response.ok) {

@@ -11,7 +11,9 @@ export default {
       areas: data.areas
     };
 
-    const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/artists/.json`, {
+    const token = context.rootGetters.token;
+
+    const response = await fetch(`https://find-artist-d3495-default-rtdb.firebaseio.com/artists/${userId}.json?auth=` + token,  {
       method: 'PUT',
       body: JSON.stringify(artistData)
     });

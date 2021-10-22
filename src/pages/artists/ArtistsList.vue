@@ -11,7 +11,8 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline" @click="loadArtists(true)">Refresh</base-button>
-        <base-button v-if="!isArtist && !isLoading" link to="/register">Register as Artist</base-button>
+        <base-button link to="/auth" v-if="!isLoggedIn">Login</base-button>
+        <base-button v-if="isLoggedIn && !isArtist && !isLoading" link to="/register">Register as Artist</base-button>
       </div>
       <div v-if="isLoading">
         <base-spinner></base-spinner>
@@ -38,6 +39,7 @@ import ArtistItem from '../../components/artists/ArtistItem.vue';
 import ArtistFilter from '../../components/artists/ArtistFilter.vue';
 import RequestItem from '../../components/requests/RequestItem.vue';
 import BaseDialog from '../../components/ui/BaseDialog.vue';
+import BaseButton from '../../components/ui/BaseButton.vue';
 
 export default {
   components: {
@@ -45,6 +47,7 @@ export default {
     ArtistFilter,
     RequestItem,
     BaseDialog,
+    BaseButton,
   },
   data() {
     return {
@@ -59,6 +62,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     isArtist() {
       return this.$store.getters['artists/isArtist'];
     },

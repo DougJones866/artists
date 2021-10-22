@@ -6,6 +6,7 @@ import ArtistRegistation from './pages/artists/ArtistRegistration.vue';
 import ContactArtist from './pages/requests/ContactArtist.vue';
 import RequestsReceived from './pages/requests/RequestsReceived.vue';
 import NotFound from './pages/NotFound.vue';
+import UserAuth from './pages/auth/UserAuth.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,7 @@ const router = createRouter({
     },
     { path: '/register', component: ArtistRegistation },
     { path: '/requests', component: RequestsReceived },
+    { path: '/auth', component: UserAuth },
     { path: '/:notFound(.*)', component: NotFound }
   ]
 });
