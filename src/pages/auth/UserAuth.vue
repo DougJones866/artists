@@ -76,14 +76,14 @@ export default {
         password: this.password,
       };
 
-      try {
-
-          
+      try { 
           if (this.mode === 'login') {
               await this.$store.dispatch('login', actionPayload);
       } else {
           await this.$store.dispatch('signup', actionPayload);
       }
+      const redirectUrl = '/' + (this.$route.query.redirect || 'artists');
+      this.$router.replace(redirectUrl);
   } catch (err) {
       this.error = err.message || 'Failed to authenticated. Check your login data.';
   }
