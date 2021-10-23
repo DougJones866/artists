@@ -14,9 +14,21 @@ export default {
   components: {
     TheHeader
   },
+  computed: {
+    didAutoLogout() {
+      return this.$store.getters.didAutoLogout;
+    }
+  },
   created() {
     this.$store.dispatch('tryLogin');
-  }  
+  },
+  watch: {
+    didAutoLogout(curValue, oldValue) {
+      if (curValue && curValue !== oldValue) {
+        this.$router.replace('/artists');
+      }
+    }
+  } 
 }
 </script>
 
@@ -55,7 +67,7 @@ body {
 
 
 .route-enter-to,
-.route-enter-from {
+.route-leave-from {
   opacity: 1;
   transform: translateY(0);
 }
